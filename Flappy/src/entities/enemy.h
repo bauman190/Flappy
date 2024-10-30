@@ -19,6 +19,5 @@ namespace gameEnemy
 
 	void InitEnemy(Rectangle& enemyRec, Vector2& enemyPos, float& velocity);
 	void UpdateEnemy(Rectangle& enemyRec, Vector2& enemyPos, float& velocity, bool isGameRunning);
-	void DrawEnemy(Rectangle enemyRec, Vector2& enemyPos);
-	float GetMousePosRespectFromPlayer(Rectangle rectangle, Vector2 mouse, int index);
+	void DrawEnemy(Rectangle enemyRec);
 }

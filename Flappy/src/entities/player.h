@@ -2,8 +2,7 @@
 
 #include <ctime>
 
-#include "mouse.h"
-#include "game_settings/constants.h"
+#include "gameSettings/constants.h"
 
 namespace gamePlayer
 {
@@ -16,36 +15,14 @@ namespace gamePlayer
 
 	struct Player
 	{
-		double spawnTime;
-		double neufarTimeSpawn;
-		PLAYERDIRECTION playerDir;
 		Rectangle playerRec;
-		Circle playerHitBox;
 		Vector2 playerPos;
-		Vector2 pivot;
-		Vector2 direction;
-		Vector2 dirNormalizado;
-		Vector2 aceleration;
-		Color playerColor;
-		float rotation;
-		float rotationSpeed;
-		float radius;
-		float impulse;
 		float velocity;
-		float angle;
 		bool matchStart;
-		double elapsedTime;
-		double currentTime;
-		float countDown;
-		float resetCountDown;
 	};
 
-	Player CreatePlayer(Player player);
+	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity);
 
-	void InputPlayer(Player& player);
-	void UpdatePlayer(Player& player, mouse::Mouse& gameMouse);
-	void DrawPlayer(Player player);
-
-	void StopMovement(Player& player);
-	float GetMousePosRespectFromPlayer(Player player, Vector2 mouse);
+	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, bool& matchStart);
+	void DrawPlayer(Rectangle playerRec, bool matchStart);
 }

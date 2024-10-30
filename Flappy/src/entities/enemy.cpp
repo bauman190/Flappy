@@ -2,8 +2,6 @@
 
 namespace gameEnemy
 {
-
-
 	void InitEnemy(Rectangle& enemyRec, Vector2& enemyPos, float& velocity)
 	{
 		float enemyStartPosX = ((screenWidth / 6) * 5);
@@ -16,8 +14,8 @@ namespace gameEnemy
 
 		enemyRec.x = enemyPos.x;
 		enemyRec.y = enemyPos.y;
-		enemyRec.width = 50.0f;
-		enemyRec.height = 150.0f;
+		enemyRec.width = 30.0f;
+		enemyRec.height = 2500.0f;
 	}
 
 	void UpdateEnemy(Rectangle& enemyRec, Vector2& enemyPos, float& velocity, bool isGameRunning)
@@ -36,38 +34,20 @@ namespace gameEnemy
 				enemyPos.y = static_cast<float> (GetRandomValue(0, static_cast<int>(screenHeight)));
 			}
 			//right
-			if (enemyPos.x > screenWidth + enemyRec.width)
+			if (enemyPos.x > screenWidth)
 				enemyPos.x = -enemyRec.width;
 			//chekeo de limites verticales
 			//left
 			if (enemyPos.y < -enemyRec.width)
 				enemyPos.y = screenWidth + enemyRec.width;
 			//right
-			if (enemyPos.y > screenHeight + enemyRec.width)
+			if (enemyPos.y > screenHeight)
 				enemyPos.y = -enemyRec.width;
 		}
 	}
-	void DrawEnemy(Rectangle rectangle, Vector2& enemyPos)
+
+	void DrawEnemy(Rectangle rectangle)
 	{
-		DrawRectangleRec(rectangle, WHITE);
-
-		if (enemyPos.x < rectangle.width)
-		{
-			DrawRectangleRec(rectangle, WHITE);
-		}
-	}
-
-	float GetMousePosRespectFromPlayer(Rectangle rectangle, Vector2 mouse, int index)
-	{
-		float dx = mouse.x - rectangle.x;
-		float dy = mouse.y - rectangle.y;
-
-		//angulo(?) en radianes
-		float theta = static_cast <float>(atan2(dy, dx));
-
-		//Convierto el ángulo a grados
-		float thetaGrados = theta * (180.0f / PI);
-
-		return thetaGrados;
+		DrawRectangleRec(rectangle, LIGHTGRAY);
 	}
 }
