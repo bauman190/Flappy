@@ -1,17 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="entities">
+      <UniqueIdentifier>{9f7da51f-e45f-485c-9753-42088118b616}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="gamePlay">
+      <UniqueIdentifier>{06bc469f-4766-4a57-afcd-8f5a618d000a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="gameSettings">
+      <UniqueIdentifier>{70abd2dc-7eeb-40e5-a1fd-c7f1bb264224}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\gameSettings\constants.h">
+      <Filter>gameSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameSettings\sceneManage.h">
+      <Filter>gameSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gamePlay\gamePlay.h">
+      <Filter>gamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\enemy.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\player.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\gamePlay\gamePlay.cpp">
+      <Filter>gamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gamePlay\main.cpp">
+      <Filter>gamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\enemy.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\player.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,102 +5,74 @@ namespace Game
 	void RunGame()
 	{
 		gamePlayer::Player player;
+		gameEnemy::enemyStructure enemy{};
 		SCENEMANAGMENT scene;
+		scene = SCENEMANAGMENT::NONE;
 
-		Init(player, scene);
+		Init(player, scene, enemy);
 
 		while (!WindowShouldClose())
 		{
-			Input(player, scene);
-			Update(player, scene);
-			Draw(player, scene);
+			//Input(player, scene);
+			Update(player, scene, enemy);
+			Draw(player, scene, enemy);
 		}
 
 		Close();
 	}
 
-	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene)
+	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure enemy)
 	{
 		switch (scene)
 		{
 		case SCENEMANAGMENT::NONE:
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " RunGame by Francisco Jonas ");
-			scene = SCENEMANAGMENT::MAINMENU;
-			player = gamePlayer::CreatePlayer(player);
+			scene = SCENEMANAGMENT::GAME;
+			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity);
+			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
+
 		default:
 			break;
 		}
 	}
-	void Input(gamePlayer::Player& player, SCENEMANAGMENT& scene)
-	{
-		switch (scene)
-		{
-		case SCENEMANAGMENT::MAINMENU:
-			break;
 
-		case SCENEMANAGMENT::CREDITS:
-			break;
+	//void Input(SCENEMANAGMENT& scene)
+	//{
+	//	switch (scene)
+	//	{
+	//
+	//		//for future menu
+	//
+	//	default:
+	//		break;
+	//	}
+	//}
 
-		case SCENEMANAGMENT::GAME:
-			gamePlayer::InputPlayer(player);
-			break;
-
-		case SCENEMANAGMENT::WINLOSESCRREN:
-			break;
-
-		case SCENEMANAGMENT::PAUSE:
-			break;
-
-		case SCENEMANAGMENT::EXIT:
-			break;
-		default:
-			break;
-		}
-	}
-	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene)
+	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure enemy)
 	{
 		switch (scene)
 		{
 		case SCENEMANAGMENT::GAME:
-			gamePlayer::UpdatePlayer(player);
-
+			gamePlayer::UpdatePlayer(player.playerRec,player.playerPos,player.velocity,player.matchStart);
+			gameEnemy::UpdateEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity, player.matchStart);
 			break;
-		case SCENEMANAGMENT::RESETGAME:
-
-			break;
-		case SCENEMANAGMENT::WINLOSESCRREN:
-			break;
-
+		
 		default:
 			break;
 		}
 	}
-	void Draw(gamePlayer::Player& player, SCENEMANAGMENT scene)
+	void Draw(gamePlayer::Player& player, SCENEMANAGMENT scene, gameEnemy::enemyStructure enemy)
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
 		switch (scene)
 		{
-		case SCENEMANAGMENT::MAINMENU:
-
-			break;
-		case SCENEMANAGMENT::CREDITS:
-
-			break;
+	
 		case SCENEMANAGMENT::GAME:
-
-			gamePlayer::DrawPlayer(player);
-
+			gameEnemy::DrawEnemy(enemy.enemyRec);
+			gamePlayer::DrawPlayer(player.playerRec,player.matchStart);
 			break;
-		case SCENEMANAGMENT::WINLOSESCRREN:
-
-			break;
-		case SCENEMANAGMENT::PAUSE:
-
-			break;
-		case SCENEMANAGMENT::EXIT:
-
-			break;
+		
 		default:
 			break;
 		}
