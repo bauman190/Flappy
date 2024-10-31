@@ -7,7 +7,7 @@ namespace gameEnemy
 		float enemyStartPosX = ((screenWidth / 6) * 5);
 		float enemyStartPosY = ((screenHeight / 6) * 5);
 
-		velocity = 200.0f;
+		velocity = 300.0f;
 
 		enemyPos.x = enemyStartPosX;
 		enemyPos.y = enemyStartPosY;
@@ -15,27 +15,29 @@ namespace gameEnemy
 		enemyRec.x = enemyPos.x;
 		enemyRec.y = enemyPos.y;
 		enemyRec.width = 30.0f;
-		enemyRec.height = 2500.0f;
+		enemyRec.height = 250.0f;
 	}
 
 	void UpdateEnemy(Rectangle& enemyRec, Vector2& enemyPos, float& velocity, bool isGameRunning)
 	{
-		if (isGameRunning)
+		if (isGameRunning == true)
 		{
 			//future sprite updated pos
-			enemyPos.x += GetFrameTime() * velocity;
-			enemyPos.y += GetFrameTime() * velocity;
+			enemyPos.x -= velocity * GetFrameTime();
+			enemyRec.x = enemyPos.x;
 
 			//chekeo de limites horizontales
 			//left
 			if (enemyPos.x < -enemyRec.width)
 			{
 				enemyPos.x = screenWidth + enemyRec.width;
-				enemyPos.y = static_cast<float> (GetRandomValue(0, static_cast<int>(screenHeight)));
+				enemyRec.x = enemyPos.x;
+				enemyPos.y = static_cast<float> (GetRandomValue(0 + static_cast<int>(enemyRec.height), static_cast<int>(screenHeight - enemyRec.height)));
+				enemyRec.y = enemyPos.y;
 			}
 			//right
-			if (enemyPos.x > screenWidth)
-				enemyPos.x = -enemyRec.width;
+			/*if (enemyPos.x > screenWidth)
+				enemyPos.x = -enemyRec.width;*/
 			//chekeo de limites verticales
 			//left
 			if (enemyPos.y < -enemyRec.width)

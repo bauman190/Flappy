@@ -21,7 +21,7 @@ namespace Game
 		Close();
 	}
 
-	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure enemy)
+	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy)
 	{
 		switch (scene)
 		{
@@ -48,7 +48,7 @@ namespace Game
 	//	}
 	//}
 
-	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure enemy)
+	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy)
 	{
 		switch (scene)
 		{
