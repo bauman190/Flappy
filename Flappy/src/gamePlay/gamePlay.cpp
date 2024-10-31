@@ -26,7 +26,7 @@ namespace Game
 		switch (scene)
 		{
 		case SCENEMANAGMENT::NONE:
-			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " RunGame by Francisco Jonas ");
+			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
 			scene = SCENEMANAGMENT::GAME;
 			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius);
 			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
