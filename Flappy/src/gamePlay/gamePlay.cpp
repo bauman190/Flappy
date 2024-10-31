@@ -28,8 +28,9 @@ namespace Game
 		case SCENEMANAGMENT::NONE:
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " RunGame by Francisco Jonas ");
 			scene = SCENEMANAGMENT::GAME;
-			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity);
+			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius);
 			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
+			player.matchStart = false;
 
 		default:
 			break;
@@ -52,8 +53,15 @@ namespace Game
 	{
 		switch (scene)
 		{
+		case SCENEMANAGMENT::NONE:
+			scene = SCENEMANAGMENT::GAME;
+			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius);
+			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
+			player.matchStart = false;
+			break;
+
 		case SCENEMANAGMENT::GAME:
-			gamePlayer::UpdatePlayer(player.playerRec,player.playerPos,player.velocity,player.matchStart);
+			gamePlayer::UpdatePlayer(player.playerRec,player.playerPos,player.velocity,player.matchStart,enemy.enemyRec,player.radius,scene);
 			gameEnemy::UpdateEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity, player.matchStart);
 			break;
 		

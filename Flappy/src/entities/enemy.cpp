@@ -35,10 +35,6 @@ namespace gameEnemy
 				enemyPos.y = static_cast<float> (GetRandomValue(0 + static_cast<int>(enemyRec.height), static_cast<int>(screenHeight - enemyRec.height)));
 				enemyRec.y = enemyPos.y;
 			}
-			//right
-			/*if (enemyPos.x > screenWidth)
-				enemyPos.x = -enemyRec.width;*/
-			//chekeo de limites verticales
 			//left
 			if (enemyPos.y < -enemyRec.width)
 				enemyPos.y = screenWidth + enemyRec.width;

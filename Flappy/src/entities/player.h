@@ -3,6 +3,7 @@
 #include <ctime>
 
 #include "gameSettings/constants.h"
+#include "gameSettings/sceneManage.h"
 
 namespace gamePlayer
 {
@@ -18,11 +19,14 @@ namespace gamePlayer
 		Rectangle playerRec;
 		Vector2 playerPos;
 		float velocity;
+		float radius;
 		bool matchStart;
 	};
 
-	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity);
+	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, float& radius);
 
-	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, bool& matchStart);
+
+	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, bool& matchStart, Rectangle enemyRec, float radius, SCENEMANAGMENT& scene);
+	bool circleRect(float radius, Rectangle enemyRec, Vector2 playerPos);
 	void DrawPlayer(Rectangle playerRec, bool matchStart);
 }
