@@ -28,7 +28,7 @@ namespace Game
 		case SCENEMANAGMENT::NONE:
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
 			scene = SCENEMANAGMENT::GAME;
-			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius);
+			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius,player.gravity,player.jumpForce);
 			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 
@@ -37,6 +37,8 @@ namespace Game
 		}
 	}
 
+	//input here only usefull for future menu
+	
 	//void Input(SCENEMANAGMENT& scene)
 	//{
 	//	switch (scene)
@@ -55,13 +57,15 @@ namespace Game
 		{
 		case SCENEMANAGMENT::NONE:
 			scene = SCENEMANAGMENT::GAME;
-			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius);
+			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity,
+				player.radius, player.gravity, player.jumpForce);
 			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 			break;
 
 		case SCENEMANAGMENT::GAME:
-			gamePlayer::UpdatePlayer(player.playerRec,player.playerPos,player.velocity,player.matchStart,enemy.enemyRec,player.radius,scene);
+			gamePlayer::UpdatePlayer(player.playerRec,player.playerPos,player.velocity,
+				player.matchStart,enemy.enemyRec,player.radius,scene,player.gravity,player.jumpForce);
 			gameEnemy::UpdateEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity, player.matchStart);
 			break;
 		

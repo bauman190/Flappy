@@ -14,12 +14,15 @@ namespace gamePlayer
 	const float playerPosX = screenWidth / 2.0f;
 	const float playerPosY = screenHeight / 2.0f;
 
-	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, float& radius)
+	void InitPlayer(Rectangle& playerRec, Vector2& playerPos,
+		float& velocity, float& radius, float& gravity, float& jumpForce)
 	{
 		float enemyStartPosX = ((screenWidth / 6) * 2);
 		float enemyStartPosY = ((screenHeight / 6) * 2);
 
-		velocity = 200.0f;
+		velocity = 0.0f;
+		gravity = 700.0f;
+		jumpForce = -300.0f;
 		radius = 30.0f;
 
 		playerPos.x = enemyStartPosX;
@@ -31,37 +34,39 @@ namespace gamePlayer
 		playerRec.height = 40.0f;
 	}
 
-	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, bool& matchStart, Rectangle enemyRec, float radius, SCENEMANAGMENT& scene)
+	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity,
+		bool& matchStart, Rectangle enemyRec, float radius, SCENEMANAGMENT& scene,
+		float& gravity, float& jumpForce)
 	{
-		if (IsKeyPressed(KEY_SPACE) || matchStart == true)
+		if (IsKeyPressed(KEY_ENTER) || matchStart == true)
 		{
 			matchStart = true;
 
-			if (IsKeyDown(KEY_W))
+			if (IsKeyPressed(KEY_SPACE))
 			{
-				playerPos.y -= velocity * GetFrameTime();
+				velocity = jumpForce;
 			}
-			if (IsKeyDown(KEY_S))
-			{
-				playerPos.y += velocity * GetFrameTime();
-			}
+			
+			velocity += gravity * GetFrameTime();
+			playerPos.y += velocity * GetFrameTime();
 
 			//future sprite updated pos
 			playerRec.x = playerPos.x;
 			playerRec.y = playerPos.y;
-
-			//chekeo de limites horizontales
-			if (playerPos.x < -playerRec.width)
-				playerPos.x = screenWidth + playerRec.width;
-
-			if (playerPos.x > screenWidth)
-				playerPos.x = -playerRec.width;
-			//chekeo de limites verticales
-			if (playerPos.y < -playerRec.height)
-				playerPos.y = screenHeight - playerRec.height;
-
+			//techo
+			if (playerPos.y < 0 )
+				playerPos.y = playerRec.height;
+			//el suelo resetea
 			if (playerPos.y > screenHeight)
-				playerPos.y = -playerRec.height;
+				scene = SCENEMANAGMENT::NONE;
+
+			////chekeo de limites horizontales
+			//if (playerPos.x < -playerRec.width)
+			//	playerPos.x = screenWidth + playerRec.width;
+
+			//if (playerPos.x > screenWidth)
+			//	playerPos.x = -playerRec.width;
+			//chekeo de limites verticales
 		}
 
 		bool isCollision = circleRect(radius, enemyRec, playerPos);
@@ -72,20 +77,20 @@ namespace gamePlayer
 		}
 	}
 
-	bool circleRect( float radius, Rectangle enemyRec, Vector2 playerPos)
+	bool circleRect(float radius, Rectangle enemyRec, Vector2 playerPos)
 	{
 		// temporary variables to set edges for testing
 		float testX = playerPos.x;
 		float testY = playerPos.y;
 
 		// which edge is closest?
-		if (playerPos.x < enemyRec.x)        
+		if (playerPos.x < enemyRec.x)
 			testX = enemyRec.x;      // test left edge
 
 		else if (playerPos.x > enemyRec.x + enemyRec.width)
 			testX = enemyRec.x + enemyRec.width;   // right edge
 
-		if (playerPos.y < enemyRec.y)      
+		if (playerPos.y < enemyRec.y)
 			testY = enemyRec.y;      // top edge
 
 		else if (playerPos.y > enemyRec.y + enemyRec.height)

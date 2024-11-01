@@ -19,14 +19,19 @@ namespace gamePlayer
 		Rectangle playerRec;
 		Vector2 playerPos;
 		float velocity;
+		float gravity;
+		float jumpForce;
 		float radius;
 		bool matchStart;
 	};
 
-	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, float& radius);
+	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity,
+		float& radius, float& gravity, float& jumpForce);
 
 
-	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity, bool& matchStart, Rectangle enemyRec, float radius, SCENEMANAGMENT& scene);
+	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity,
+		bool& matchStart, Rectangle enemyRec, float radius,
+		SCENEMANAGMENT& scene, float& gravity, float& jumpForce);
 	bool circleRect(float radius, Rectangle enemyRec, Vector2 playerPos);
 	void DrawPlayer(Rectangle playerRec, bool matchStart);
 }
