@@ -14,13 +14,9 @@ namespace gamePlayer
 	const float playerPosX = screenWidth / 2.0f;
 	const float playerPosY = screenHeight / 2.0f;
 
-<<<<<<< Updated upstream
-	void InitPlayer(Rectangle& playerRec, Vector2& playerPos,
-		float& velocity, float& radius, float& gravity, float& jumpForce)
-=======
+
 	void InitPlayer(Rectangle& playerRec, Texture2D playerSprite, Rectangle& frameRect, Vector2& playerPos, float& velocity,
 		float& radius, float& gravity, float& jumpForce)
->>>>>>> Stashed changes
 	{
 		frameRect = { 0.0f, 0.0f, static_cast <float>(playerSprite.width / 6), static_cast<float>(playerSprite.height) };
 

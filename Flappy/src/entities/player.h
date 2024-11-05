@@ -30,17 +30,8 @@ namespace gamePlayer
 		float radius;
 		bool matchStart;
 	};
-
-<<<<<<< Updated upstream
-	void InitPlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity,
-		float& radius, float& gravity, float& jumpForce);
-
-
-=======
 	void InitPlayer(Rectangle& playerRec, Texture2D playerSprite, Rectangle& frameRect, Vector2& playerPos, float& velocity,
 		float& radius, float& gravity, float& jumpForce);
-
->>>>>>> Stashed changes
 	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity,
 		bool& matchStart, Rectangle enemyRec, float radius,
 		SCENEMANAGMENT& scene, float& gravity, float& jumpForce);

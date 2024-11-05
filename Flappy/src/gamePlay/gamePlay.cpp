@@ -34,11 +34,7 @@ namespace Game
 			player.playerSprite = LoadTexture("Flappy/res/Meow-Knight_Jump.png");
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
 			scene = SCENEMANAGMENT::GAME;
-<<<<<<< Updated upstream
-			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity, player.radius,player.gravity,player.jumpForce);
-=======
 			gamePlayer::InitPlayer(player.playerRec, player.playerSprite, player.frameRec, player.playerPos, player.velocity, player.radius, player.gravity, player.jumpForce);
->>>>>>> Stashed changes
 			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 
@@ -48,7 +44,7 @@ namespace Game
 	}
 
 	//input here only usefull for future menu
-	
+
 	//void Input(SCENEMANAGMENT& scene)
 	//{
 	//	switch (scene)
@@ -67,23 +63,19 @@ namespace Game
 		{
 		case SCENEMANAGMENT::NONE:
 			scene = SCENEMANAGMENT::GAME;
-<<<<<<< Updated upstream
-			gamePlayer::InitPlayer(player.playerRec, player.playerPos, player.velocity,
-=======
 			player.frameRec = { 0.0f, 0.0f, (float)player.playerSprite.width / 6, (float)player.playerSprite.height };
 			gamePlayer::InitPlayer(player.playerRec, player.playerSprite, player.frameRec, player.playerPos, player.velocity,
->>>>>>> Stashed changes
 				player.radius, player.gravity, player.jumpForce);
 			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 			break;
 
 		case SCENEMANAGMENT::GAME:
-			gamePlayer::UpdatePlayer(player.playerRec,player.playerPos,player.velocity,
-				player.matchStart,enemy.enemyRec,player.radius,scene,player.gravity,player.jumpForce);
+			gamePlayer::UpdatePlayer(player.playerRec, player.playerPos, player.velocity,
+				player.matchStart, enemy.enemyRec, player.radius, scene, player.gravity, player.jumpForce);
 			gameEnemy::UpdateEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity, player.matchStart);
 			break;
-		
+
 		default:
 			break;
 		}
@@ -94,12 +86,12 @@ namespace Game
 		ClearBackground(BLACK);
 		switch (scene)
 		{
-	
+
 		case SCENEMANAGMENT::GAME:
 			gameEnemy::DrawEnemy(enemy.enemyRec);
-			gamePlayer::DrawPlayer(player.playerRec,player.matchStart);
+			gamePlayer::DrawPlayer(player.playerRec, player.matchStart);
 			break;
-		
+
 		default:
 			break;
 		}
