@@ -114,7 +114,7 @@ namespace gamePlayer
 
 		if (matchStart == false)
 		{
-			DrawText("Press spaceBar to start", 350, 350, 30, LIGHTGRAY);
+			DrawText("Press ENTER to start", 350, 350, 30, LIGHTGRAY);
 		}
 	}
 }
