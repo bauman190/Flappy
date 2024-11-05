@@ -14,9 +14,16 @@ namespace gamePlayer
 	const float playerPosX = screenWidth / 2.0f;
 	const float playerPosY = screenHeight / 2.0f;
 
+<<<<<<< Updated upstream
 	void InitPlayer(Rectangle& playerRec, Vector2& playerPos,
 		float& velocity, float& radius, float& gravity, float& jumpForce)
+=======
+	void InitPlayer(Rectangle& playerRec, Texture2D playerSprite, Rectangle& frameRect, Vector2& playerPos, float& velocity,
+		float& radius, float& gravity, float& jumpForce)
+>>>>>>> Stashed changes
 	{
+		frameRect = { 0.0f, 0.0f, static_cast <float>(playerSprite.width / 6), static_cast<float>(playerSprite.height) };
+
 		float enemyStartPosX = ((screenWidth / 6) * 2);
 		float enemyStartPosY = ((screenHeight / 6) * 2);
 
@@ -28,6 +35,8 @@ namespace gamePlayer
 		playerPos.x = enemyStartPosX;
 		playerPos.y = enemyStartPosY;
 
+		frameRect.x = playerPos.x;
+		frameRect.y = playerPos.y;
 		playerRec.x = playerPos.x;
 		playerRec.y = playerPos.y;
 		playerRec.width = 40.0f;

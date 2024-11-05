@@ -10,6 +10,11 @@ const float midScreenHeight = screenHeight / 2;
 const float screenHeightDiv6 = screenHeight / 6;
 const float auxFloat = 100.0f;
 
+
+const int MAX_FRAME_SPEED = 15;
+const int MIN_FRAME_SPEED = 1;
+
+
 struct Circle
 {
 	Vector2 circlePos;
