@@ -21,8 +21,8 @@ namespace gamePlayer
 		float enemyStartPosY = ((screenHeight / 6) * 2);
 
 		velocity = 0.0f;
-		gravity = 700.0f;
-		jumpForce = -300.0f;
+		gravity = 980.0f;
+		jumpForce = -450.0f;
 		radius = 30.0f;
 
 		playerPos.x = enemyStartPosX;
