@@ -15,59 +15,56 @@ namespace gamePlayer
 	const float playerPosY = screenHeight / 2.0f;
 
 
-	void InitPlayer(Rectangle& playerRec, Texture2D playerSprite, Rectangle& frameRect, Vector2& playerPos, float& velocity,
-		float& radius, float& gravity, float& jumpForce)
+	void InitPlayer(Player& player)
 	{
-		playerRec = { 0.0f, 0.0f, static_cast <float>(playerSprite.width / 6), static_cast<float>(playerSprite.height) };
+		player.playerRec = { 0.0f, 0.0f, static_cast <float>(player.playerSprite.width / 6), static_cast<float>(player.playerSprite.height) };
 
 		float playerStartPosX = ((screenWidth / 6) * 2);
 		float playerStartPosY = ((screenHeight / 6) * 2);
 
-		velocity = 0.0f;
-		gravity = 980.0f;
-		jumpForce = -450.0f;
-		radius = 30.0f;
+		player.velocity = 0.0f;
+		player.gravity = 980.0f;
+		player.jumpForce = -450.0f;
+		player.radius = 30.0f;
 
-		playerPos.x = playerStartPosX;
-		playerPos.y = playerStartPosY;
-
-		frameRect.x = playerPos.x;
-		frameRect.y = playerPos.y;
-		playerRec.x = playerPos.x;
-		playerRec.y = playerPos.y;
-		playerRec.width = 40.0f;
-		playerRec.height = 40.0f;
+		player.playerPos.x = playerStartPosX;
+		player.playerPos.y = playerStartPosY;
+		
+		player.frameRec.x = player.playerPos.x;
+		player.frameRec.y = player.playerPos.y;
+		player.playerRec.x = player.playerPos.x;
+		player.playerRec.y = player.playerPos.y;
+		player.playerRec.width = 40.0f;
+		player.playerRec.height = 40.0f;
 	}
 
-	void UpdatePlayer(Rectangle& playerRec, Vector2& playerPos, float& velocity,
-		bool& matchStart, Rectangle enemyRec, float radius, SCENEMANAGMENT& scene,
-		float& gravity, float& jumpForce)
+	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec)
 	{
 
-		if (IsKeyPressed(KEY_ENTER) || matchStart == true)
+		if (IsKeyPressed(KEY_ENTER) || player.matchStart == true)
 		{
-			matchStart = true;
+			player.matchStart = true;
 
 			if (IsKeyPressed(KEY_SPACE))
 			{
-				velocity = jumpForce;
+				player.velocity = player.jumpForce;
 			}
 			
-			velocity += gravity * GetFrameTime();
-			playerPos.y += velocity * GetFrameTime();
+			player.velocity += player.gravity * GetFrameTime();
+			player.playerPos.y += player.velocity * GetFrameTime();
 
 			//future sprite updated pos
-			playerRec.x = playerPos.x;
-			playerRec.y = playerPos.y;
+			player.playerRec.x = player.playerPos.x;
+			player.playerRec.y = player.playerPos.y;
 			//techo
-			if (playerPos.y < 0 )
-				playerPos.y = playerRec.height;
+			if (player.playerPos.y < 0 )
+				player.playerPos.y = player.playerRec.height;
 			//el suelo resetea
-			if (playerPos.y > screenHeight)
+			if (player.playerPos.y > screenHeight)
 				scene = SCENEMANAGMENT::NONE;
 		}
 
-		bool isCollision = circleRect(radius, enemyRec, playerPos);
+		bool isCollision = circleRect(player.radius, enemyRec, player.playerPos);
 
 		if (isCollision == true)
 		{
