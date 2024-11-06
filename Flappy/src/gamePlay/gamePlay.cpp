@@ -35,7 +35,7 @@ namespace Game
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
 			scene = SCENEMANAGMENT::GAME;
 			gamePlayer::InitPlayer(player.playerRec, player.playerSprite, player.frameRec, player.playerPos, player.velocity, player.radius, player.gravity, player.jumpForce);
-			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
+			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 
 		default:
@@ -66,14 +66,14 @@ namespace Game
 			player.frameRec = { 0.0f, 0.0f, (float)player.playerSprite.width / 6, (float)player.playerSprite.height };
 			gamePlayer::InitPlayer(player.playerRec, player.playerSprite, player.frameRec, player.playerPos, player.velocity,
 				player.radius, player.gravity, player.jumpForce);
-			gameEnemy::InitEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity);
+			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 			break;
 
 		case SCENEMANAGMENT::GAME:
 			gamePlayer::UpdatePlayer(player.playerRec, player.playerPos, player.velocity,
-				player.matchStart, enemy.enemyRec, player.radius, scene, player.gravity, player.jumpForce);
-			gameEnemy::UpdateEnemy(enemy.enemyRec, enemy.enemyPos, enemy.velocity, player.matchStart);
+				player.matchStart, enemy.enemyRecDown, player.radius, scene, player.gravity, player.jumpForce);
+			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
 			break;
 
 		default:
@@ -88,7 +88,7 @@ namespace Game
 		{
 
 		case SCENEMANAGMENT::GAME:
-			gameEnemy::DrawEnemy(enemy.enemyRec);
+			gameEnemy::DrawEnemy(enemy.enemyRecDown,enemy.enemyRecUp);
 			gamePlayer::DrawPlayer(player.playerRec, player.matchStart);
 			break;
 
