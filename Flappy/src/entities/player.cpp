@@ -18,18 +18,18 @@ namespace gamePlayer
 	void InitPlayer(Rectangle& playerRec, Texture2D playerSprite, Rectangle& frameRect, Vector2& playerPos, float& velocity,
 		float& radius, float& gravity, float& jumpForce)
 	{
-		frameRect = { 0.0f, 0.0f, static_cast <float>(playerSprite.width / 6), static_cast<float>(playerSprite.height) };
+		playerRec = { 0.0f, 0.0f, static_cast <float>(playerSprite.width / 6), static_cast<float>(playerSprite.height) };
 
-		float enemyStartPosX = ((screenWidth / 6) * 2);
-		float enemyStartPosY = ((screenHeight / 6) * 2);
+		float playerStartPosX = ((screenWidth / 6) * 2);
+		float playerStartPosY = ((screenHeight / 6) * 2);
 
 		velocity = 0.0f;
 		gravity = 980.0f;
 		jumpForce = -450.0f;
 		radius = 30.0f;
 
-		playerPos.x = enemyStartPosX;
-		playerPos.y = enemyStartPosY;
+		playerPos.x = playerStartPosX;
+		playerPos.y = playerStartPosY;
 
 		frameRect.x = playerPos.x;
 		frameRect.y = playerPos.y;
@@ -43,6 +43,7 @@ namespace gamePlayer
 		bool& matchStart, Rectangle enemyRec, float radius, SCENEMANAGMENT& scene,
 		float& gravity, float& jumpForce)
 	{
+
 		if (IsKeyPressed(KEY_ENTER) || matchStart == true)
 		{
 			matchStart = true;
@@ -64,14 +65,6 @@ namespace gamePlayer
 			//el suelo resetea
 			if (playerPos.y > screenHeight)
 				scene = SCENEMANAGMENT::NONE;
-
-			////chekeo de limites horizontales
-			//if (playerPos.x < -playerRec.width)
-			//	playerPos.x = screenWidth + playerRec.width;
-
-			//if (playerPos.x > screenWidth)
-			//	playerPos.x = -playerRec.width;
-			//chekeo de limites verticales
 		}
 
 		bool isCollision = circleRect(radius, enemyRec, playerPos);

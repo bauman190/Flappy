@@ -27,6 +27,12 @@
     <ClInclude Include="src\entities\player.h">
       <Filter>entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\entities\mouse.h">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gamePlay\gameMenu.h">
+      <Filter>gamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\gamePlay\gamePlay.cpp">
@@ -40,6 +46,12 @@
     </ClCompile>
     <ClCompile Include="src\entities\player.cpp">
       <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\mouse.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gamePlay\gameMenu.cpp">
+      <Filter>gamePlay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

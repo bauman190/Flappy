@@ -31,7 +31,7 @@ namespace Game
 			player.currentFrame = 0;
 			player.framesCounter = 0;
 			player.framesSpeed = 8;
-			player.playerSprite = LoadTexture("Flappy/res/Meow-Knight_Jump.png");
+			player.playerSprite = LoadTexture("Flappy/res/Meow-Knight_JumpHor.png");
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
 			scene = SCENEMANAGMENT::GAME;
 			gamePlayer::InitPlayer(player.playerRec, player.playerSprite, player.frameRec, player.playerPos, player.velocity, player.radius, player.gravity, player.jumpForce);
