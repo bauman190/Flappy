@@ -7,17 +7,18 @@ namespace Game
 		gamePlayer::Player player;
 		gameEnemy::enemyStructure enemy{};
 		gameMenu::Menu mainMenu;
+		gameMenu::Menu credits;
 		gameMouse::Mouse mouse;
 		SCENEMANAGMENT scene;
 		scene = SCENEMANAGMENT::NONE;
 
-		Init(player, scene, enemy, mainMenu, mouse);
+		Init(player, scene, enemy, mainMenu, mouse, credits);
 
 		while (!WindowShouldClose())
 		{
-			Input(scene, mainMenu, mouse);
-			Update(player, scene, enemy, mainMenu, mouse);
-			Draw(player, scene, enemy, mainMenu, mouse);
+			Input(scene, mainMenu, mouse, credits);
+			Update(player, scene, enemy, mouse);
+			Draw(player, scene, enemy, mainMenu, mouse, credits);
 		}
 
 		UnloadTexture(player.playerSprite);
@@ -25,7 +26,7 @@ namespace Game
 		Close();
 	}
 
-	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse)
+	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu& credits)
 	{
 		switch (scene)
 		{
@@ -40,7 +41,9 @@ namespace Game
 
 			scene = SCENEMANAGMENT::MAINMENU;
 			mainMenu = gameMenu::CreateMainMenu();
+			credits = gameMenu::CreateCredits();
 			gamePlayer::InitPlayer(player);
+			mouse = gameMouse::CreateMouse(mouse);
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			break;
 		default:
@@ -48,7 +51,7 @@ namespace Game
 		}
 	}
 
-	void Input(SCENEMANAGMENT& scene, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse)
+	void Input(SCENEMANAGMENT& scene, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu& credits)
 	{
 		switch (scene)
 		{
@@ -56,14 +59,14 @@ namespace Game
 			gameMenu::InputMainMenu(mainMenu, mouse, scene);
 			break;
 		case SCENEMANAGMENT::CREDITS:
-			gameMenu::InputCredits(scene);
+			gameMenu::InputCredits(credits, mouse, scene);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse)
+	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMouse::Mouse& mouse)
 	{
 		switch (scene)
 		{
@@ -75,14 +78,22 @@ namespace Game
 			player.matchStart = false;
 			break;
 		case SCENEMANAGMENT::GAME:
+			gameMouse::UpdateMousePos(mouse);
 			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
+			break;
+
+		case SCENEMANAGMENT::MAINMENU:
+			gameMouse::UpdateMousePos(mouse);
+			break;
+		case SCENEMANAGMENT::CREDITS:
+			gameMouse::UpdateMousePos(mouse);
 			break;
 		default:
 			break;
 		}
 	}
-	void Draw(gamePlayer::Player& player, SCENEMANAGMENT scene, gameEnemy::enemyStructure enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse)
+	void Draw(gamePlayer::Player& player, SCENEMANAGMENT scene, gameEnemy::enemyStructure enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu credits)
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
@@ -97,8 +108,8 @@ namespace Game
 			gameMenu::DrawMainMenuorPause(mainMenu, scene, mouse);
 			break;
 		case SCENEMANAGMENT::CREDITS:
-			gameMenu::DrawCredits()
-				break;
+			gameMenu::DrawCredits(credits, mouse);
+			break;
 		default:
 			break;
 		}

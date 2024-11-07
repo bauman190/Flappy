@@ -8,7 +8,7 @@ namespace gameMenu
 	const int textFontSize = 25;
 	const int titleFontSize = 50;
 	const float auxXCorrect = 75.0f;
-	const float auxTitleXCorrect = 65.0f;
+	const float auxTitleXCorrect = 25.0f;
 	//BUTTON CENTER
 	const float buttonCenterX = (buttonWidth / 4.0f) + 10.0f;
 	const float buttonCenterY = buttonHeiht / 4.0f;
@@ -31,18 +31,6 @@ namespace gameMenu
 	const float exitTextButtonPosX = auxButtonPosX + buttonCenterX;
 	const float exitTextButtonPosY = auxButtonPosY_4 + buttonCenterY;
 
-	//CREDITS settings-----------------------------------
-	const float auxCreditsTextPosX = screenWidth / 3;
-	const float creditsText1PosY = (screenHeight / 7);
-	const float creditsText2PosY = (screenHeight / 7) * 2;
-	const float creditsText3PosY = (screenHeight / 7) * 3;
-	const float creditsText4PosY = (screenHeight / 7) * 4;
-	const float creditsText5PosY = (screenHeight / 7) * 5;
-	const float creditsText6PosY = (screenHeight / 7) * 6;
-
-	const float creditsText7PosY = (screenHeight / 7) * 7;
-	const float backButtonPosX = screenWidth / 5;
-	const float backButtonPosY = screenWidth / 5;
 
 	////EXIT-----------------------------------------------
 	////question text1
@@ -73,7 +61,7 @@ namespace gameMenu
 	{
 		Menu menu;
 		//PLAY BUTTON
-			menu.secondButton.buttonPos.x = auxButtonPosX;
+		menu.secondButton.buttonPos.x = auxButtonPosX;
 		menu.secondButton.buttonPos.y = auxButtonPosY_2;
 
 		menu.secondButton.buttonSize.x = buttonWidth;
@@ -103,6 +91,25 @@ namespace gameMenu
 		//mainAndPauseMenu.fourthButton.buttonCenterPos.y = buttonCenterY;
 
 		return menu;
+	}
+	Menu CreateCredits()
+	{
+		Menu credits;
+
+		float backButtonPosX = 10.0f;
+		float backButtonPosY = screenHeight - 50.0f;
+		/*float backButtonTextPosX = 10.0f;
+		float backButtonTextPosY = screenHeight - 10.0f;*/
+		credits.firstButton.buttonPos.x = backButtonPosX;
+		credits.firstButton.buttonPos.y = backButtonPosY;
+		credits.firstButton.buttonSize.x = buttonWidth;
+		credits.firstButton.buttonSize.y = buttonHeiht;
+
+		credits.buttonText.textPos.x = backButtonPosX+45.0f;
+		credits.buttonText.textPos.y = backButtonPosY+10.0f;
+		credits.buttonText.fontSize = textFontSize;
+
+		return credits;
 	}
 	/*Menu CreateWinLoseScreen(Menu winScreen)
 	{
@@ -134,16 +141,22 @@ namespace gameMenu
 		//	scene = SCENEMANAGMENT::EXIT;
 		//}
 	}
-	void InputCredits(SCENEMANAGMENT& scene)
+	void InputCredits(Menu credits, gameMouse::Mouse gameMouse, SCENEMANAGMENT& scene)
 	{
-		// BACK BUTTON
-		if (IsKeyPressed(KEY_ESCAPE))
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && isOverButon(gameMouse,
+			credits.firstButton.buttonPos, credits.firstButton.buttonSize))
 		{
-			if (IsKeyReleased(KEY_ESCAPE))
-			{
-				scene = SCENEMANAGMENT::MAINMENU;
-			}
+			scene = SCENEMANAGMENT::MAINMENU;
 		}
+
+		//// BACK BUTTON
+		//if (IsKeyPressed(KEY_ESCAPE))
+		//{
+		//	if (IsKeyReleased(KEY_ESCAPE))
+		//	{
+		//		scene = SCENEMANAGMENT::MAINMENU;
+		//	}
+		//}
 	}
 	//void InputPauseMenu(Menu mainAndPauseMenu, mouse::Mouse gameMouse, SCENEMANAGMENT& scene)
 	//{
@@ -199,27 +212,28 @@ namespace gameMenu
 
 	void DrawMainMenuorPause(Menu mainAndPauseMenu, SCENEMANAGMENT scene, gameMouse::Mouse gameMouse)
 	{
+		//PLAY or RESUME
 		if (isOverButon(gameMouse, mainAndPauseMenu.secondButton.buttonPos, mainAndPauseMenu.secondButton.buttonSize))
 			DrawButton(mainAndPauseMenu.secondButton.buttonPos, mainAndPauseMenu.secondButton.buttonSize, LIGHTGRAY);
 		else
 			DrawButton(mainAndPauseMenu.secondButton.buttonPos, mainAndPauseMenu.secondButton.buttonSize, WHITE);
-
+		//CREDITS or RESET
 		if (isOverButon(gameMouse, mainAndPauseMenu.thirdButton.buttonPos, mainAndPauseMenu.thirdButton.buttonSize))
 			DrawButton(mainAndPauseMenu.thirdButton.buttonPos, mainAndPauseMenu.thirdButton.buttonSize, LIGHTGRAY);
 		else
 			DrawButton(mainAndPauseMenu.thirdButton.buttonPos, mainAndPauseMenu.thirdButton.buttonSize, WHITE);
-
-		if (isOverButon(gameMouse, mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize))
+		//EXIT or BACKTOMENU
+		/*if (isOverButon(gameMouse, mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize))
 			DrawButton(mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize, LIGHTGRAY);
 		else
-			DrawButton(mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize, WHITE);
+			DrawButton(mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize, WHITE);*/
 
 		if (scene == SCENEMANAGMENT::MAINMENU)
 		{
-			PrintText("ARACNOIDS", (titleTextPosX - auxTitleXCorrect), titleTextPosY, titleFontSize, RED);
+			PrintText("FLAPPY", (titleTextPosX - auxTitleXCorrect), titleTextPosY, titleFontSize, RED);
 			PrintText("PLAY", playTextPosX, playTextPosY, textFontSize, RED);
 			PrintText("CREDITS", creditsTextButtonPosX, creditsTextButtonPosY, textFontSize, RED);
-			PrintText("EXIT", exitTextButtonPosX, exitTextButtonPosY, textFontSize, RED);
+			//PrintText("EXIT", exitTextButtonPosX, exitTextButtonPosY, textFontSize, RED);
 		}
 
 		/*else
@@ -231,9 +245,33 @@ namespace gameMenu
 		}*/
 
 	}
-	void DrawCredits(Menu credits)
+	void DrawCredits(Menu credits, gameMouse::Mouse gameMouse)
 	{
-		PrintText("CREdits here", credits.firstButton.buttonPos.x, credits.firstButton.buttonPos.y, textFontSize, RED);
+		//CREDITS settings-----------------------------------
+		const float auxCreditsTextPosX = screenWidth / 3;
+		const float creditsText1PosY = (screenHeight / 7);
+		const float creditsText2PosY = (screenHeight / 7) * 2;
+		const float creditsText3PosY = (screenHeight / 7) * 3;
+		const float creditsText4PosY = (screenHeight / 7) * 4;
+		const float creditsText5PosY = (screenHeight / 7) * 5;
+		const float creditsText6PosY = (screenHeight / 7) * 6;
+		const float creditsText7PosY = (screenHeight / 7) * 7;
+		//const float backButtonPosX = screenWidth / 5;
+		//const float backButtonPosY = screenWidth / 5;
+
+		PrintText("CREDITS", auxCreditsTextPosX, creditsText1PosY, textFontSize, RED);
+		PrintText("Made by FRANCISCO JONAS", auxCreditsTextPosX, creditsText2PosY, textFontSize, RED);
+		PrintText("CREdits here", auxCreditsTextPosX, creditsText3PosY, textFontSize, RED);
+		PrintText("CREdits here", auxCreditsTextPosX, creditsText4PosY, textFontSize, RED);
+		PrintText("CREdits here", auxCreditsTextPosX, creditsText5PosY, textFontSize, RED);
+		PrintText("CREdits here", auxCreditsTextPosX, creditsText6PosY, textFontSize, RED);
+		PrintText("CREdits here", auxCreditsTextPosX, creditsText7PosY, textFontSize, RED);
+
+		if (isOverButon(gameMouse, credits.firstButton.buttonPos, credits.firstButton.buttonSize))
+			DrawButton(credits.firstButton.buttonPos, credits.firstButton.buttonSize, LIGHTGRAY);
+		else
+			DrawButton(credits.firstButton.buttonPos, credits.firstButton.buttonSize, WHITE);
+		PrintText("BACK", credits.buttonText.textPos.x, credits.buttonText.textPos.y, textFontSize, RED);
 	}
 	/*void DrawExitMenu(Menu exitScreen)
 	{

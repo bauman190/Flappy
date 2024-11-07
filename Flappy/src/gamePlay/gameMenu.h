@@ -34,17 +34,18 @@ namespace gameMenu
 	};
 
 	Menu CreateMainMenu();
+	Menu CreateCredits();
 	//Menu CreateWinLoseScreen(Menu winScreen);
 	//Menu CreateExitScreen(Menu exitScreen);
 
 	void InputMainMenu(Menu mainAndPauseMenu, gameMouse::Mouse gameMouse, SCENEMANAGMENT& scene);
-	void InputCredits(SCENEMANAGMENT& scene);
+	void InputCredits(Menu credits, gameMouse::Mouse gameMouse, SCENEMANAGMENT& scene);
 	//void InputPauseMenu(Menu mainAndPauseMenu, mouse::Mouse gameMouse, SCENEMANAGMENT& scene);
 	//void InputWinLoseScreen(Menu winLoseScreen, mouse::Mouse gameMouse, SCENEMANAGMENT& scene);
 	//void InputExitScreen(Menu exitScreen, mouse::Mouse gameMouse, SCENEMANAGMENT& scene);
 
 	void DrawMainMenuorPause(Menu mainAndPauseMenu, SCENEMANAGMENT scene, gameMouse::Mouse gameMouse);
-	void DrawCredits(Menu credits);
+	void DrawCredits(Menu credits, gameMouse::Mouse gameMouse);
 	//void DrawExitMenu(Menu exitScreen);
 	//void DrawWinLoseScreen(Menu winLoseScreen);
 

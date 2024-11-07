@@ -17,13 +17,13 @@ namespace gamePlayer
 	struct Player
 	{
 		Texture2D playerSprite; // Texture loading
-		Rectangle frameRec;
+		Rectangle frameRec = { 0.0f,0.0f,0.0f,0.0f };
 		int currentFrame = 0;
 		int framesCounter = 0;
 		int framesSpeed = 8;            // Number of spritesheet frames shown by second
 
-		Rectangle playerRec;
-		Vector2 playerPos;
+		Rectangle playerRec{ 0.0f,0.0f,0.0f,0.0f };
+		Vector2 playerPos = { 0.0f,0.0f };
 		float velocity;
 		float gravity;
 		float jumpForce;
