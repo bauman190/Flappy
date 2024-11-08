@@ -36,6 +36,9 @@
     <ClInclude Include="src\entities\playerAnim.h">
       <Filter>entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\entities\backAnim.h">
+      <Filter>entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\gamePlay\gamePlay.cpp">
@@ -57,6 +60,9 @@
       <Filter>gamePlay</Filter>
     </ClCompile>
     <ClCompile Include="src\entities\playerAnim.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\backAnim.cpp">
       <Filter>entities</Filter>
     </ClCompile>
   </ItemGroup>

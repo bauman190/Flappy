@@ -21,4 +21,5 @@ namespace gameSprite
 	Sprite CreatePlayerSprite(gamePlayer::Player player);
 	void UpdateSprite(Sprite& playerSprt, gamePlayer::Player player);
 	void DrawSprite(Sprite playerSprt);
+	void UnloadTextures(Sprite& playerSprt);
 }

@@ -58,4 +58,9 @@ namespace gameSprite
 	{
 		DrawTexturePro(playerSprt.playerSprt, playerSprt.frameRec, playerSprt.scaleFrame, playerSprt.spritePos, 0.0f, WHITE);
 	}
+
+	void UnloadTextures(Sprite& playerSprt)
+	{
+		UnloadTexture(playerSprt.playerSprt);
+	}
 }

@@ -171,6 +171,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\backAnim.h" />
     <ClInclude Include="src\entities\enemy.h" />
     <ClInclude Include="src\entities\mouse.h" />
     <ClInclude Include="src\entities\player.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="src\gameSettings\sceneManage.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\entities\backAnim.cpp" />
     <ClCompile Include="src\entities\enemy.cpp" />
     <ClCompile Include="src\entities\mouse.cpp" />
     <ClCompile Include="src\entities\player.cpp" />

@@ -1,5 +1,7 @@
 #include "gamePlay.h"
 
+#include "entities/backAnim.h"
+
 namespace Game
 {
 	void RunGame()
@@ -22,12 +24,14 @@ namespace Game
 			Draw(player, scene, enemy, mainMenu, mouse, credits, playerSprt);
 		}
 
-		UnloadTexture(playerSprt.playerSprt);
+		DeInit(playerSprt);
+
 		Close();
 	}
 
 	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy,
-		gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu& credits, gameSprite::Sprite& playerSprt)
+		gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu& credits,
+		gameSprite::Sprite& playerSprt)
 	{
 		switch (scene)
 		{
@@ -38,11 +42,13 @@ namespace Game
 			gamePlayer::InitPlayer(player);
 
 			playerSprt = gameSprite::CreatePlayerSprite(player);
-			playerSprt.playerSprt = LoadTexture("res/Meow-Knight_JumpAdjust.png");
+			gameBackAnim::CreateBackScene();
+			//playerSprt.playerSprt = LoadTexture("res/Meow-Knight_JumpAdjust.png");
 			scene = SCENEMANAGMENT::MAINMENU;
 			mainMenu = gameMenu::CreateMainMenu();
 			credits = gameMenu::CreateCredits();
 			mouse = gameMouse::CreateMouse(mouse);
+
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			break;
 		default:
@@ -65,7 +71,8 @@ namespace Game
 		}
 	}
 
-	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMouse::Mouse& mouse, gameSprite::Sprite& playerSprt)
+	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy,
+		gameMouse::Mouse& mouse, gameSprite::Sprite& playerSprt)
 	{
 		switch (scene)
 		{
@@ -80,6 +87,7 @@ namespace Game
 			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
 			gameSprite::UpdateSprite(playerSprt, player);
+			gameBackAnim::UpdateBackground( player.matchStart);
 			break;
 
 		case SCENEMANAGMENT::MAINMENU:
@@ -101,14 +109,17 @@ namespace Game
 		switch (scene)
 		{
 		case SCENEMANAGMENT::GAME:
+			gameBackAnim::DrawBackground();
 			gameEnemy::DrawEnemy(enemy.enemyRecDown, enemy.enemyRecUp);
 			gamePlayer::DrawPlayer(player);
 			gameSprite::DrawSprite(playerSprt);
 			break;
 		case SCENEMANAGMENT::MAINMENU:
+			gameBackAnim::DrawBackground();
 			gameMenu::DrawMainMenuorPause(mainMenu, scene, mouse);
 			break;
 		case SCENEMANAGMENT::CREDITS:
+			gameBackAnim::DrawBackground();
 			gameMenu::DrawCredits(credits, mouse);
 			break;
 		default:
@@ -116,6 +127,12 @@ namespace Game
 		}
 
 		EndDrawing();
+	}
+
+	void DeInit(gameSprite::Sprite playerSprt)
+	{
+		gameSprite::UnloadTextures(playerSprt);
+		gameBackAnim::UnloadTextures();
 	}
 
 	void Close()
