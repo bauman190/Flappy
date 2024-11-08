@@ -17,8 +17,6 @@ namespace gamePlayer
 
 	void InitPlayer(Player& player)
 	{
-		player.playerRec = { 0.0f, 0.0f, static_cast <float>(player.playerSprite.width / 6), static_cast<float>(player.playerSprite.height) };
-
 		float playerStartPosX = ((screenWidth / 6) * 2);
 		float playerStartPosY = ((screenHeight / 6) * 2);
 
@@ -30,8 +28,6 @@ namespace gamePlayer
 		player.playerPos.x = playerStartPosX;
 		player.playerPos.y = playerStartPosY;
 		
-		player.frameRec.x = player.playerPos.x;
-		player.frameRec.y = player.playerPos.y;
 		player.playerRec.x = player.playerPos.x;
 		player.playerRec.y = player.playerPos.y;
 		player.playerRec.width = 40.0f;
@@ -48,12 +44,13 @@ namespace gamePlayer
 			if (IsKeyPressed(KEY_SPACE))
 			{
 				player.velocity = player.jumpForce;
+				player.isAnimating = !player.isAnimating;
 			}
-			
+
 			player.velocity += player.gravity * GetFrameTime();
 			player.playerPos.y += player.velocity * GetFrameTime();
 
-			//future sprite updated pos
+			////future sprite updated pos
 			player.playerRec.x = player.playerPos.x;
 			player.playerRec.y = player.playerPos.y;
 			//techo
@@ -103,11 +100,11 @@ namespace gamePlayer
 		return false;
 	}
 
-	void DrawPlayer(Rectangle playerRec, bool matchStart)
+	void DrawPlayer(Player player)
 	{
-		DrawRectangleRec(playerRec, WHITE);
-
-		if (matchStart == false)
+		DrawRectangleRec(player.playerRec, WHITE);
+		
+		if (player.matchStart == false)
 		{
 			DrawText("Press ENTER to start", 350, 350, 30, LIGHTGRAY);
 		}

@@ -9,40 +9,39 @@ namespace Game
 		gameMenu::Menu mainMenu;
 		gameMenu::Menu credits;
 		gameMouse::Mouse mouse;
+		gameSprite::Sprite playerSprt;
 		SCENEMANAGMENT scene;
 		scene = SCENEMANAGMENT::NONE;
 
-		Init(player, scene, enemy, mainMenu, mouse, credits);
+		Init(player, scene, enemy, mainMenu, mouse, credits, playerSprt);
 
 		while (!WindowShouldClose())
 		{
 			Input(scene, mainMenu, mouse, credits);
-			Update(player, scene, enemy, mouse);
-			Draw(player, scene, enemy, mainMenu, mouse, credits);
+			Update(player, scene, enemy, mouse,playerSprt);
+			Draw(player, scene, enemy, mainMenu, mouse, credits, playerSprt);
 		}
 
-		UnloadTexture(player.playerSprite);
-
+		UnloadTexture(playerSprt.playerSprt);
 		Close();
 	}
 
-	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu& credits)
+	void Init(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy,
+		gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu& credits, gameSprite::Sprite& playerSprt)
 	{
 		switch (scene)
 		{
 		case SCENEMANAGMENT::NONE:
-			player.currentFrame = 0;
-			player.framesCounter = 0;
-			player.framesSpeed = 8;
-			player.playerSprite = LoadTexture("Flappy/res/Meow-Knight_JumpHor.png");
-			player.matchStart = false;
 
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
 
+			gamePlayer::InitPlayer(player);
+
+			playerSprt = gameSprite::CreatePlayerSprite(player);
+			playerSprt.playerSprt = LoadTexture("res/Meow-Knight_JumpAdjust.png");
 			scene = SCENEMANAGMENT::MAINMENU;
 			mainMenu = gameMenu::CreateMainMenu();
 			credits = gameMenu::CreateCredits();
-			gamePlayer::InitPlayer(player);
 			mouse = gameMouse::CreateMouse(mouse);
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			break;
@@ -66,13 +65,12 @@ namespace Game
 		}
 	}
 
-	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMouse::Mouse& mouse)
+	void Update(gamePlayer::Player& player, SCENEMANAGMENT& scene, gameEnemy::enemyStructure& enemy, gameMouse::Mouse& mouse, gameSprite::Sprite& playerSprt)
 	{
 		switch (scene)
 		{
 		case SCENEMANAGMENT::NONE:
 			scene = SCENEMANAGMENT::GAME;
-			player.frameRec = { 0.0f, 0.0f, (float)player.playerSprite.width / 6, (float)player.playerSprite.height };
 			gamePlayer::InitPlayer(player);
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
@@ -81,6 +79,7 @@ namespace Game
 			gameMouse::UpdateMousePos(mouse);
 			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
+			gameSprite::UpdateSprite(playerSprt, player);
 			break;
 
 		case SCENEMANAGMENT::MAINMENU:
@@ -93,16 +92,18 @@ namespace Game
 			break;
 		}
 	}
-	void Draw(gamePlayer::Player& player, SCENEMANAGMENT scene, gameEnemy::enemyStructure enemy, gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu credits)
+
+	void Draw(gamePlayer::Player& player, SCENEMANAGMENT scene, gameEnemy::enemyStructure enemy,
+		gameMenu::Menu& mainMenu, gameMouse::Mouse& mouse, gameMenu::Menu credits, gameSprite::Sprite playerSprt)
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
 		switch (scene)
 		{
-
 		case SCENEMANAGMENT::GAME:
 			gameEnemy::DrawEnemy(enemy.enemyRecDown, enemy.enemyRecUp);
-			gamePlayer::DrawPlayer(player.playerRec, player.matchStart);
+			gamePlayer::DrawPlayer(player);
+			gameSprite::DrawSprite(playerSprt);
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameMenu::DrawMainMenuorPause(mainMenu, scene, mouse);

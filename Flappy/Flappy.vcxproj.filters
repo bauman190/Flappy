@@ -33,6 +33,9 @@
     <ClInclude Include="src\gamePlay\gameMenu.h">
       <Filter>gamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="src\entities\playerAnim.h">
+      <Filter>entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\gamePlay\gamePlay.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="src\gamePlay\gameMenu.cpp">
       <Filter>gamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\playerAnim.cpp">
+      <Filter>entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
