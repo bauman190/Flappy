@@ -33,7 +33,7 @@ namespace Game
 		{
 		case SCENEMANAGMENT::NONE:
 
-			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.1 ");
+			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.2 ");
 
 			gamePlayer::InitPlayer(player);
 
