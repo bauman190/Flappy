@@ -84,7 +84,7 @@ namespace Game
 			break;
 		case SCENEMANAGMENT::GAME:
 			gameMouse::UpdateMousePos(mouse);
-			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown);
+			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown, enemy.enemyRecUp);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
 			gameSprite::UpdateSprite(playerSprt, player);
 			gameBackAnim::UpdateBackground( player.matchStart);

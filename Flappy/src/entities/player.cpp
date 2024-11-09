@@ -34,7 +34,7 @@ namespace gamePlayer
 		player.playerRec.height = 40.0f;
 	}
 
-	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec)
+	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec, Rectangle enemyRecUp)
 	{
 
 		if (IsKeyPressed(KEY_ENTER) || player.matchStart == true)
@@ -60,8 +60,8 @@ namespace gamePlayer
 			if (player.playerPos.y > screenHeight)
 				scene = SCENEMANAGMENT::NONE;
 		}
-
-		bool isCollision = circleRect(player.radius, enemyRec, player.playerPos);
+		bool isCollision = circleRect(player.radius, enemyRec, player.playerPos) || circleRect(player.radius, enemyRecUp, player.playerPos);
+		
 
 		if (isCollision == true)
 		{

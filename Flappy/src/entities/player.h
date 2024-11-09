@@ -30,7 +30,7 @@ namespace gamePlayer
 		bool matchStart = false;
 	};
 	void InitPlayer(Player& player);
-	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec);
+	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec, Rectangle enemyRecUp);
 	bool circleRect(float radius, Rectangle enemyRec, Vector2 playerPos);
 	void DrawPlayer(Player player);
 }
