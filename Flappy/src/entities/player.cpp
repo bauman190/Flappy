@@ -102,7 +102,6 @@ namespace gamePlayer
 
 	void DrawPlayer(Player player)
 	{
-		//DrawRectangleRec(player.playerRec, WHITE);
 		
 		if (player.matchStart == false)
 		{
