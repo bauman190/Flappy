@@ -250,6 +250,7 @@ namespace gameMenu
 			PrintText("FLAPPY", (titleTextPosX - auxTitleXCorrect), titleTextPosY, titleFontSize, RED);
 			PrintText("PLAY", playTextPosX, playTextPosY, textFontSize, RED);
 			PrintText("CREDITS", creditsTextButtonPosX, creditsTextButtonPosY, textFontSize, RED);
+			PrintText("0.2", static_cast<float>(screenWidth * 0.95), static_cast<float>(screenHeight * 0.95), textFontSize, RED);
 			//PrintText("EXIT", exitTextButtonPosX, exitTextButtonPosY, textFontSize, RED);
 		}
 
@@ -270,9 +271,9 @@ namespace gameMenu
 		const float creditsText2PosY = (screenHeight / 7) * 2;
 		const float creditsText3PosY = (screenHeight / 7) * 3;
 		const float creditsText4PosY = (screenHeight / 7) * 4;
-		const float creditsText5PosY = (screenHeight / 7) * 5;
-		const float creditsText6PosY = (screenHeight / 7) * 6;
-		const float creditsText7PosY = (screenHeight / 7) * 7;
+		//const float creditsText5PosY = (screenHeight / 7) * 5;
+		//const float creditsText6PosY = (screenHeight / 7) * 6;
+		//const float creditsText7PosY = (screenHeight / 7) * 7;
 		//const float backButtonPosX = screenWidth / 5;
 		//const float backButtonPosY = screenWidth / 5;
 		Cats.buttonPos.x = auxCreditsTextPosX;
@@ -286,9 +287,6 @@ namespace gameMenu
 		PrintText("CREDITS", auxCreditsTextPosX, creditsText1PosY, textFontSize, RED);
 		PrintText("Made by FRANCISCO JONAS and Juan Bautista Castignani", auxCreditsTextPosX, creditsText2PosY, textFontSize, RED);
 		PrintText("Background", auxCreditsTextPosX, creditsText4PosY, textFontSize, RED);
-		PrintText("CREdits here", auxCreditsTextPosX, creditsText5PosY, textFontSize, RED);
-		PrintText("CREdits here", auxCreditsTextPosX, creditsText6PosY, textFontSize, RED);
-		PrintText("CREdits here", auxCreditsTextPosX, creditsText7PosY, textFontSize, RED);
 
 		if (isOverButon(gameMouse, credits.firstButton.buttonPos, credits.firstButton.buttonSize))
 			DrawButton(credits.firstButton.buttonPos, credits.firstButton.buttonSize, LIGHTGRAY);
