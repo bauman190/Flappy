@@ -72,8 +72,8 @@ namespace gamePlayer
 	bool circleRect(float radius, Rectangle enemyRec, Vector2 playerPos)
 	{
 		// temporary variables to set edges for testing
-		float testX = playerPos.x;
-		float testY = playerPos.y;
+		float testX = playerPos.x + radius / 2;
+		float testY = playerPos.y + radius / 2;
 
 		// which edge is closest?
 		if (playerPos.x < enemyRec.x)
@@ -102,7 +102,7 @@ namespace gamePlayer
 
 	void DrawPlayer(Player player)
 	{
-		DrawRectangleRec(player.playerRec, WHITE);
+		//DrawRectangleRec(player.playerRec, WHITE);
 		
 		if (player.matchStart == false)
 		{

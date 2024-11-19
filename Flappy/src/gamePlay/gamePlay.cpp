@@ -112,7 +112,11 @@ namespace Game
 			gameBackAnim::DrawBackground();
 			gameEnemy::DrawEnemy(enemy.enemyRecDown, enemy.enemyRecUp);
 			gamePlayer::DrawPlayer(player);
+#ifdef _DEBUG
+			DrawCircle(static_cast<int>(player.playerPos.x + player.radius / 2), static_cast<int>(player.playerPos.y + player.radius / 2), player.radius, BLACK);
+#endif
 			gameSprite::DrawSprite(playerSprt);
+			
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameBackAnim::DrawBackground();
