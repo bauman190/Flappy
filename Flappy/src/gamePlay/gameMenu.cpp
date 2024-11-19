@@ -32,6 +32,9 @@ namespace gameMenu
 	const float exitTextButtonPosY = auxButtonPosY_4 + buttonCenterY;
 
 
+	static Button Cats;
+	static Button Backgraund;
+
 	////EXIT-----------------------------------------------
 	////question text1
 	//const float auxExitTextPosX = screenWidth / 3;
@@ -148,6 +151,20 @@ namespace gameMenu
 		{
 			scene = SCENEMANAGMENT::MAINMENU;
 		}
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && isOverButon(gameMouse,
+			Cats.buttonPos, Cats.buttonSize))
+		{
+			std::string CatsUrl = "https://9e0.itch.io/cute-legends-cat-heroes";
+			std::string command = "start chrome \"" + CatsUrl + "\"";
+			system(command.c_str());
+		}
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && isOverButon(gameMouse,
+			Backgraund.buttonPos, Backgraund.buttonSize))
+		{
+			std::string BackgraundUrl = "https://edermunizz.itch.io/free-pixel-art-forest";
+			std::string command = "start chrome \"" + BackgraundUrl + "\"";
+			system(command.c_str());
+		}
 
 		//// BACK BUTTON
 		//if (IsKeyPressed(KEY_ESCAPE))
@@ -248,7 +265,7 @@ namespace gameMenu
 	void DrawCredits(Menu credits, gameMouse::Mouse gameMouse)
 	{
 		//CREDITS settings-----------------------------------
-		const float auxCreditsTextPosX = screenWidth / 3;
+		const float auxCreditsTextPosX = screenWidth / 8;
 		const float creditsText1PosY = (screenHeight / 7);
 		const float creditsText2PosY = (screenHeight / 7) * 2;
 		const float creditsText3PosY = (screenHeight / 7) * 3;
@@ -258,11 +275,17 @@ namespace gameMenu
 		const float creditsText7PosY = (screenHeight / 7) * 7;
 		//const float backButtonPosX = screenWidth / 5;
 		//const float backButtonPosY = screenWidth / 5;
-
+		Cats.buttonPos.x = auxCreditsTextPosX;
+		Cats.buttonPos.y = creditsText3PosY;
+		Cats.buttonSize.x = buttonWidth;
+		Cats.buttonSize.y = buttonHeiht;
+		Backgraund.buttonPos.x = auxCreditsTextPosX;
+		Backgraund.buttonPos.y = creditsText4PosY;
+		Backgraund.buttonSize.x = buttonWidth;
+		Backgraund.buttonSize.y = buttonHeiht;
 		PrintText("CREDITS", auxCreditsTextPosX, creditsText1PosY, textFontSize, RED);
-		PrintText("Made by FRANCISCO JONAS", auxCreditsTextPosX, creditsText2PosY, textFontSize, RED);
-		PrintText("CREdits here", auxCreditsTextPosX, creditsText3PosY, textFontSize, RED);
-		PrintText("CREdits here", auxCreditsTextPosX, creditsText4PosY, textFontSize, RED);
+		PrintText("Made by FRANCISCO JONAS and Juan Bautista Castignani", auxCreditsTextPosX, creditsText2PosY, textFontSize, RED);
+		PrintText("Background", auxCreditsTextPosX, creditsText4PosY, textFontSize, RED);
 		PrintText("CREdits here", auxCreditsTextPosX, creditsText5PosY, textFontSize, RED);
 		PrintText("CREdits here", auxCreditsTextPosX, creditsText6PosY, textFontSize, RED);
 		PrintText("CREdits here", auxCreditsTextPosX, creditsText7PosY, textFontSize, RED);
@@ -272,6 +295,22 @@ namespace gameMenu
 		else
 			DrawButton(credits.firstButton.buttonPos, credits.firstButton.buttonSize, WHITE);
 		PrintText("BACK", credits.buttonText.textPos.x, credits.buttonText.textPos.y, textFontSize, RED);
+
+		if(isOverButon(gameMouse, Cats.buttonPos, Cats.buttonSize))
+			DrawButton(Cats.buttonPos, Cats.buttonSize, LIGHTGRAY);
+		else
+			DrawButton(Cats.buttonPos, Cats.buttonSize, WHITE);
+
+		if (isOverButon(gameMouse, Backgraund.buttonPos, Backgraund.buttonSize))
+			DrawButton(Backgraund.buttonPos, Backgraund.buttonSize, LIGHTGRAY);
+		else
+			DrawButton(Backgraund.buttonPos, Backgraund.buttonSize, WHITE);
+
+		
+		PrintText("Background", auxCreditsTextPosX, creditsText4PosY, textFontSize, RED);
+		PrintText("By: edermunizz", auxCreditsTextPosX + Cats.buttonSize.x, creditsText4PosY, textFontSize, RED);
+		PrintText("Cats", auxCreditsTextPosX, creditsText3PosY, textFontSize, RED);
+		PrintText("By: 9EO", auxCreditsTextPosX + Backgraund.buttonSize.x, creditsText3PosY, textFontSize, RED);
 	}
 	/*void DrawExitMenu(Menu exitScreen)
 	{
