@@ -10,11 +10,13 @@ namespace gameBackAnim
 		Texture2D midground;
 		Texture2D frontground;
 		Texture2D front2ground;
+		Texture2D backLayer;
 
 		float scrollingBack;
 		float scrollingMid;
 		float scrollingFront;
 		float scrollingFront2;
+		float scrollingbackLayer;
 		float backSpeed;
 		float midSpeed;
 		float frontSpeed;
