@@ -21,6 +21,7 @@ namespace gameMenu
 	const float auxButtonPosY_2 = screenHeightDiv6 * 2.0f;
 	const float auxButtonPosY_3 = screenHeightDiv6 * 3.0f;
 	const float auxButtonPosY_4 = screenHeightDiv6 * 4.0f;
+	const float auxButtonPosY_5 = screenHeightDiv6 * 4.1f;
 	//text main menu
 	const float titleTextPosX = auxButtonPosX;
 	const float titleTextPosY = auxButtonPosY_1;
@@ -28,6 +29,8 @@ namespace gameMenu
 	const float playTextPosY = auxButtonPosY_2 + buttonCenterY;
 	const float creditsTextButtonPosX = auxButtonPosX + buttonCenterX / 2;
 	const float creditsTextButtonPosY = auxButtonPosY_3 + buttonCenterY;
+	const float players2TextButtonPosX = auxButtonPosX + buttonCenterX / 2;
+	const float players2TextButtonPosY = auxButtonPosY_5 + buttonCenterY;
 	const float exitTextButtonPosX = auxButtonPosX + buttonCenterX;
 	const float exitTextButtonPosY = auxButtonPosY_4 + buttonCenterY;
 
@@ -93,6 +96,16 @@ namespace gameMenu
 		//mainAndPauseMenu.fourthButton.buttonCenterPos.x = buttonCenterX;
 		//mainAndPauseMenu.fourthButton.buttonCenterPos.y = buttonCenterY;
 
+		//2players
+
+		menu.fifthButton.buttonPos.x = auxButtonPosX;
+		menu.fifthButton.buttonPos.y = auxButtonPosY_5;
+
+		menu.fifthButton.buttonSize.x = buttonWidth;
+		menu.fifthButton.buttonSize.y = buttonHeiht;
+
+		menu.fifthButton.buttonCenterPos.x = buttonCenterX;
+		menu.fifthButton.buttonCenterPos.y = buttonCenterY;
 		return menu;
 	}
 	Menu CreateCredits()
@@ -136,6 +149,11 @@ namespace gameMenu
 			mainAndPauseMenu.thirdButton.buttonPos, mainAndPauseMenu.thirdButton.buttonSize))
 		{
 			scene = SCENEMANAGMENT::CREDITS;
+		}
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && isOverButon(gameMouse,
+			mainAndPauseMenu.fifthButton.buttonPos, mainAndPauseMenu.fifthButton.buttonSize))
+		{
+			scene = SCENEMANAGMENT::GAME2PLAYERS;
 		}
 		//// EXIT BUTTON
 		//if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && isOverButon(gameMouse,
@@ -239,6 +257,11 @@ namespace gameMenu
 			DrawButton(mainAndPauseMenu.thirdButton.buttonPos, mainAndPauseMenu.thirdButton.buttonSize, LIGHTGRAY);
 		else
 			DrawButton(mainAndPauseMenu.thirdButton.buttonPos, mainAndPauseMenu.thirdButton.buttonSize, WHITE);
+		//2PLAYERS
+		if (isOverButon(gameMouse, mainAndPauseMenu.fifthButton.buttonPos, mainAndPauseMenu.fifthButton.buttonSize))
+			DrawButton(mainAndPauseMenu.fifthButton.buttonPos, mainAndPauseMenu.fifthButton.buttonSize, LIGHTGRAY);
+		else
+			DrawButton(mainAndPauseMenu.fifthButton.buttonPos, mainAndPauseMenu.fifthButton.buttonSize, WHITE);
 		//EXIT or BACKTOMENU
 		/*if (isOverButon(gameMouse, mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize))
 			DrawButton(mainAndPauseMenu.fourthButton.buttonPos, mainAndPauseMenu.fourthButton.buttonSize, LIGHTGRAY);
@@ -251,6 +274,7 @@ namespace gameMenu
 			PrintText("PLAY", playTextPosX, playTextPosY, textFontSize, RED);
 			PrintText("CREDITS", creditsTextButtonPosX, creditsTextButtonPosY, textFontSize, RED);
 			PrintText("0.3", static_cast<float>(screenWidth * 0.95), static_cast<float>(screenHeight * 0.95), textFontSize, RED);
+			PrintText("2 PLAYERS", players2TextButtonPosX, players2TextButtonPosY, textFontSize, RED);
 			//PrintText("EXIT", exitTextButtonPosX, exitTextButtonPosY, textFontSize, RED);
 		}
 

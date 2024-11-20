@@ -30,6 +30,7 @@ namespace gameMenu
 		Button secondButton;
 		Button thirdButton;
 		Button fourthButton;
+		Button fifthButton;
 		Text buttonText{ 0.0f,0.0f,5 };
 	};
 

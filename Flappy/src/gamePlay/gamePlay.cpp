@@ -89,7 +89,13 @@ namespace Game
 			gameSprite::UpdateSprite(playerSprt, player);
 			gameBackAnim::UpdateBackground( player.matchStart);
 			break;
+		case SCENEMANAGMENT::GAME2PLAYERS:
+			gameMouse::UpdateMousePos(mouse);
 
+			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
+
+			gameBackAnim::UpdateBackground(player.matchStart);
+			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameMouse::UpdateMousePos(mouse);
 			break;
@@ -117,6 +123,11 @@ namespace Game
 #endif
 			gameSprite::DrawSprite(playerSprt);
 			
+			break;
+		case SCENEMANAGMENT::GAME2PLAYERS:
+			gameBackAnim::DrawBackground();
+			gameEnemy::DrawEnemy(enemy.enemyRecDown, enemy.enemyRecUp);
+
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameBackAnim::DrawBackground();
