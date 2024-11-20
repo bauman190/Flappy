@@ -43,7 +43,7 @@ namespace Game
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.2 ");
 
 			gamePlayer::InitPlayer(player, ((screenWidth / 6) * 2), ((screenHeight / 6) * 2));
-			gamePlayer::InitPlayer(player2, ((screenWidth / 7) * 2), (screenHeight / 6) * 2);
+			gamePlayer::InitPlayer(player2, ((screenWidth / 10) * 2), (screenHeight / 6) * 2);
 
 			playerSprt = gameSprite::CreatePlayerSprite(player);
 			player2Sprt = gameSprite::CreatePlayerSprite(player2);
@@ -91,7 +91,7 @@ namespace Game
 				scene = SCENEMANAGMENT::GAME2PLAYERS;
 			}
 			gamePlayer::InitPlayer(player, ((screenWidth / 6) * 2), ((screenHeight / 6) * 2));
-			gamePlayer::InitPlayer(player2, ((screenWidth / 9) * 2), (screenHeight / 6) * 2);
+			gamePlayer::InitPlayer(player2, ((screenWidth / 10) * 2), (screenHeight / 6) * 2);
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
 			player2.matchStart = false;
@@ -148,6 +148,8 @@ namespace Game
 			gamePlayer::DrawPlayer(player);
 			gameSprite::DrawSprite(playerSprt);
 			gameSprite::DrawSprite(player2Sprt);
+			DrawText("Right Player to jump: Space", static_cast<int>(screenWidth * 0.1f), static_cast<int>(screenHeightDiv6), 20, RED);
+			DrawText("Left Player to jump: UP", static_cast<int>(screenWidth * 0.1f), static_cast<int>(screenHeight / 8), 20, RED);
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameBackAnim::DrawBackground();
