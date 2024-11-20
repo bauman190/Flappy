@@ -250,7 +250,7 @@ namespace gameMenu
 			PrintText("FLAPPY", (titleTextPosX - auxTitleXCorrect), titleTextPosY, titleFontSize, RED);
 			PrintText("PLAY", playTextPosX, playTextPosY, textFontSize, RED);
 			PrintText("CREDITS", creditsTextButtonPosX, creditsTextButtonPosY, textFontSize, RED);
-			PrintText("0.2", static_cast<float>(screenWidth * 0.95), static_cast<float>(screenHeight * 0.95), textFontSize, RED);
+			PrintText("0.3", static_cast<float>(screenWidth * 0.95), static_cast<float>(screenHeight * 0.95), textFontSize, RED);
 			//PrintText("EXIT", exitTextButtonPosX, exitTextButtonPosY, textFontSize, RED);
 		}
 
