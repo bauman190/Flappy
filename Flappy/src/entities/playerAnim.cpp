@@ -31,27 +31,31 @@ namespace gameSprite
 		float scaleFramPosX = player.playerPos.x + 60.0f;
 		float scaleFramPosY = player.playerPos.y + 7.0f;
 
-		playerSprt.framesCounter++;
+		float farmeSpeed = 10.0f;
 
+		playerSprt.framesCounter += GetFrameTime();
+		
 		if (IsKeyPressed(KEY_SPACE))
 		{
 			playerSprt.isAnimated = true;
 		}
 
-		if (playerSprt.isAnimated)
+		if (playerSprt.isAnimated && playerSprt.framesCounter >=  (GetFPS() / farmeSpeed) * GetFrameTime())
 		{
 			playerSprt.framesCounter = 0;
 			playerSprt.currentFrame++;
 
-			if (playerSprt.currentFrame > 5) playerSprt.currentFrame = 0;
-
+			if (playerSprt.currentFrame > 5)
+			{
+			playerSprt.currentFrame = 0;
+			playerSprt.isAnimated = false;
+			}
 			playerSprt.frameRec.x = (float)playerSprt.currentFrame * (float)playerSprt.playerSprt.width / 10;
 
-			playerSprt.isAnimated = false;
 		}
 		playerSprt.scaleFrame.x = scaleFramPosX;
 		playerSprt.scaleFrame.y = scaleFramPosY;
-
+		
 	}
 
 	void DrawSprite(Sprite playerSprt)
