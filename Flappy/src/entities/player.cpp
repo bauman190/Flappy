@@ -15,10 +15,10 @@ namespace gamePlayer
 	const float playerPosY = screenHeight / 2.0f;
 
 
-	void InitPlayer(Player& player)
+	void InitPlayer(Player& player, float x, float y)
 	{
-		float playerStartPosX = ((screenWidth / 6) * 2);
-		float playerStartPosY = ((screenHeight / 6) * 2);
+		float playerStartPosX = x;// ((screenWidth / 6) * 2);
+		float playerStartPosY = y; // ((screenHeight / 6) * 2);
 
 		player.velocity = 0.0f;
 		player.gravity = 980.0f;
@@ -34,14 +34,14 @@ namespace gamePlayer
 		player.playerRec.height = 40.0f;
 	}
 
-	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec, Rectangle enemyRecUp)
+	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec, Rectangle enemyRecUp, KeyboardKey key)
 	{
 
 		if (IsKeyPressed(KEY_ENTER) || player.matchStart == true)
 		{
 			player.matchStart = true;
 
-			if (IsKeyPressed(KEY_SPACE))
+			if (IsKeyPressed(key))
 			{
 				player.velocity = player.jumpForce;
 				player.isAnimating = !player.isAnimating;

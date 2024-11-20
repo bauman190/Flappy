@@ -29,8 +29,8 @@ namespace gamePlayer
 		float radius;
 		bool matchStart = false;
 	};
-	void InitPlayer(Player& player);
-	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec, Rectangle enemyRecUp);
+	void InitPlayer(Player& player, float x, float y);
+	void UpdatePlayer(Player& player, SCENEMANAGMENT& scene, Rectangle enemyRec, Rectangle enemyRecUp, KeyboardKey key);
 	bool circleRect(float radius, Rectangle enemyRec, Vector2 playerPos);
 	void DrawPlayer(Player player);
 }

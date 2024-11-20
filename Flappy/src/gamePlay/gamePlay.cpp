@@ -5,6 +5,8 @@
 namespace Game
 {
 	SCENEMANAGMENT lastSene = SCENEMANAGMENT::NONE;
+	gamePlayer::Player player2;
+	gameSprite::Sprite player2Sprt;
 	void RunGame()
 	{
 		gamePlayer::Player player;
@@ -40,9 +42,11 @@ namespace Game
 
 			InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), " Francisco Jonas Flappy v0.2 ");
 
-			gamePlayer::InitPlayer(player);
+			gamePlayer::InitPlayer(player, ((screenWidth / 6) * 2), ((screenHeight / 6) * 2));
+			gamePlayer::InitPlayer(player2, ((screenWidth / 7) * 2), (screenHeight / 6) * 2);
 
 			playerSprt = gameSprite::CreatePlayerSprite(player);
+			player2Sprt = gameSprite::CreatePlayerSprite(player2);
 			gameBackAnim::CreateBackScene();
 			//playerSprt.playerSprt = LoadTexture("res/Meow-Knight_JumpAdjust.png");
 			scene = SCENEMANAGMENT::MAINMENU;
@@ -86,13 +90,15 @@ namespace Game
 			{
 				scene = SCENEMANAGMENT::GAME2PLAYERS;
 			}
-			gamePlayer::InitPlayer(player);
+			gamePlayer::InitPlayer(player, ((screenWidth / 6) * 2), ((screenHeight / 6) * 2));
+			gamePlayer::InitPlayer(player2, ((screenWidth / 9) * 2), (screenHeight / 6) * 2);
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
+			player2.matchStart = false;
 			break;
 		case SCENEMANAGMENT::GAME:
 			gameMouse::UpdateMousePos(mouse);
-			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown, enemy.enemyRecUp);
+			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown, enemy.enemyRecUp, KEY_SPACE);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
 			gameSprite::UpdateSprite(playerSprt, player);
 			gameBackAnim::UpdateBackground( player.matchStart);
@@ -100,9 +106,11 @@ namespace Game
 			break;
 		case SCENEMANAGMENT::GAME2PLAYERS:
 			gameMouse::UpdateMousePos(mouse);
-			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown, enemy.enemyRecUp);
+			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown, enemy.enemyRecUp, KEY_SPACE);
+			gamePlayer::UpdatePlayer(player2, scene, enemy.enemyRecDown, enemy.enemyRecUp, KEY_UP);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
 			gameSprite::UpdateSprite(playerSprt, player);
+			gameSprite::UpdateSprite(player2Sprt, player2);
 			gameBackAnim::UpdateBackground(player.matchStart);
 			lastSene = SCENEMANAGMENT::GAME2PLAYERS;
 			break;
@@ -139,6 +147,7 @@ namespace Game
 			gameEnemy::DrawEnemy(enemy.enemyRecDown, enemy.enemyRecUp);
 			gamePlayer::DrawPlayer(player);
 			gameSprite::DrawSprite(playerSprt);
+			gameSprite::DrawSprite(player2Sprt);
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameBackAnim::DrawBackground();
