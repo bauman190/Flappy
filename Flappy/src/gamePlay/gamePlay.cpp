@@ -4,6 +4,7 @@
 
 namespace Game
 {
+	SCENEMANAGMENT lastSene = SCENEMANAGMENT::NONE;
 	void RunGame()
 	{
 		gamePlayer::Player player;
@@ -77,7 +78,14 @@ namespace Game
 		switch (scene)
 		{
 		case SCENEMANAGMENT::NONE:
-			scene = SCENEMANAGMENT::GAME;
+			if (lastSene == SCENEMANAGMENT::GAME)
+			{
+				scene = SCENEMANAGMENT::GAME;
+			}
+			else if (lastSene == SCENEMANAGMENT::GAME2PLAYERS)
+			{
+				scene = SCENEMANAGMENT::GAME2PLAYERS;
+			}
 			gamePlayer::InitPlayer(player);
 			gameEnemy::InitEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity);
 			player.matchStart = false;
@@ -88,13 +96,15 @@ namespace Game
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
 			gameSprite::UpdateSprite(playerSprt, player);
 			gameBackAnim::UpdateBackground( player.matchStart);
+			lastSene = SCENEMANAGMENT::GAME;
 			break;
 		case SCENEMANAGMENT::GAME2PLAYERS:
 			gameMouse::UpdateMousePos(mouse);
-
+			gamePlayer::UpdatePlayer(player, scene, enemy.enemyRecDown, enemy.enemyRecUp);
 			gameEnemy::UpdateEnemy(enemy.enemyRecDown, enemy.enemyRecUp, enemy.enemyPos, enemy.velocity, player.matchStart);
-
+			gameSprite::UpdateSprite(playerSprt, player);
 			gameBackAnim::UpdateBackground(player.matchStart);
+			lastSene = SCENEMANAGMENT::GAME2PLAYERS;
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameMouse::UpdateMousePos(mouse);
@@ -127,7 +137,8 @@ namespace Game
 		case SCENEMANAGMENT::GAME2PLAYERS:
 			gameBackAnim::DrawBackground();
 			gameEnemy::DrawEnemy(enemy.enemyRecDown, enemy.enemyRecUp);
-
+			gamePlayer::DrawPlayer(player);
+			gameSprite::DrawSprite(playerSprt);
 			break;
 		case SCENEMANAGMENT::MAINMENU:
 			gameBackAnim::DrawBackground();
